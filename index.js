@@ -4,7 +4,7 @@
 
 //steps-
 //backend server✅
-//fpage (for staff)- create+ read✅ + DEL button✅ + updaTE
+//fpage (for staff)- create✅+ read✅ + DEL button✅ + updaTE
 //spage- input details=table of available staff
 
 import express from "express";
@@ -49,9 +49,7 @@ app.post("/add", (req, res) => {
     req.body.phoneNo,
     req.body.startTime,
     req.body.endTime,
-    Array.isArray(req.body.daysAvailable)
-      ? req.body.daysAvailable.join(",")
-      : "", // Ensure daysAvailable is handled properly
+    JSON.stringify(req.body.daysAvailable),
   ];
 
   db.query(q, values, (err, data) => {
@@ -88,9 +86,7 @@ app.put("/:id", (req, res) => {
     req.body.phoneNo,
     req.body.startTime,
     req.body.endTime,
-    Array.isArray(req.body.daysAvailable)
-      ? req.body.daysAvailable.join(",")
-      : "", // Ensure daysAvailable is handled properly
+    JSON.stringify(req.body.daysAvailable),
     id,
   ];
   db.query(q, values, (err, data) => {
